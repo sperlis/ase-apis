@@ -1,0 +1,9 @@
+{
+    "ase" : {
+        "Username":"",
+        "Password":"",
+        "KeyId":"",
+        "KeySecret":""
+    },
+    "host":"https://ase-daily:9443"
+}
