@@ -33,15 +33,17 @@ class ASELib(CommonLib):
         if (asUNPW):
             loginObj = {"userId": Id, "password": Secret, "featureKey": "AppScanEnterpriseUser"}
             res = requests.post(f"{self.host()}/ase/api/login", json=loginObj, verify=False)
+            if (res.status_code != 200):
+                print(res.text)
+                return
             self.authInfo = res.json()
         else:
             loginObj = {"keyId": Id, "keySecret": Secret}
             res = requests.post(f"{self.host()}/ase/api/eylogin/apikeylogin", json=loginObj, verify=False)
+            if (res.status_code != 200):
+                print(res.text)
+                return
             self.authInfo = res.json()
-
-        if (res.status_code != 200):
-            print(res.text)
-            return
 
         self.authHeaders = {"asc_xsrf_token":self.authInfo["sessionId"]}
         self.authCookies = res.cookies
